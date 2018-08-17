@@ -7,17 +7,17 @@
 
 	<div v-else-if="status === 'show'" class="search-results-content">
 
-		<div class="payment" v-for="item in items" v-on:click="showDetails(item)">
+		<div class="payment selected1" v-for="item in items" v-on:click="showDetails(item)">
 			<div class="search-results-item search-results-choose"><span class="circle"></span></div>
-			<div class="search-results-item search-results-sender">{{ item.username }}</div>
-			<div class="search-results-item search-results-transfer">{{ item.first_name }}</div>
-			<div class="search-results-item search-results-sender">{{ item.email }}</div>
-			<div class="search-results-item search-results-transfer">{{ item.emailVerified }}</div>
-			<div class="search-results-item search-results-amount">{{ item.last_name }}</div>
+      <div class="search-results-item search-results-transfer">{{ item.first_name }}</div>
+      <div class="search-results-item search-results-transfer" >{{ item.last_name }}</div>
+      <div class="search-results-item search-results-transfer">{{ item.username }}</div>
+      <div class="search-results-item search-results-sender">{{ item.email }}</div>
+
 
 			<div class="search-results-item search-results-result long-term">
 				<span class="search-results-icon"></span>
-				{{ item.index }}
+				{{ item.id }}
 			</div>
 
 		</div>
