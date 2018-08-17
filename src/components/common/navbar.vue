@@ -30,6 +30,11 @@
           <span class="fp-nav-link">Balance</span>
         </li>
 
+        <li class="fp-nav-item fp-nav-item-right" v-on:click="changeRoute('inputs')"
+            v-bind:class="{ active: inputs }">
+          <span class="fp-nav-link">Received</span>
+        </li>
+
         <li class="fp-nav-item fp-nav-item-right" v-on:click="changeRoute('clients')"
             v-bind:class="{ active: clients }">
           <span class="fp-nav-link">Clients</span>
@@ -71,6 +76,12 @@
 					<span class="hot-key-hint">5</span>
 				</li>
 
+        <li class="fp-nav-item fp-nav-item-left" v-on:click="changeRoute('inputs')"
+            v-bind:class="{ active: inputs }">
+          <span class="fp-nav-link" title="Received">RE</span>
+          <span class="hot-key-hint">2</span>
+        </li>
+
         <li class="fp-nav-item fp-nav-item-left" v-on:click="changeRoute('clients')"
             v-bind:class="{ active: clients }">
           <span class="fp-nav-link" title="Clients">CL</span>
@@ -97,9 +108,11 @@ export default {
 				searchQuery: '',
 				route: appConfig.route,
 				isActive: false,
-        clients: null,
-				find: null,
+
         balance: null,
+        inputs: null,
+        clients: null,
+
 				users: null,
 				login: null,
 				logout: null,
@@ -117,23 +130,23 @@ export default {
 			},
 			methods: {
 				init() {
-					if (this.route == 'Payments') {
-						this.find = true;
-					} else {
-						this.find = false;
-					}
+          if (this.route == 'Balance') {
+            this.balance = true;
+          } else {
+            this.balance = false;
+          }
 
-					if (this.route == 'Clients') {
-						this.clients = true;
-					} else {
-						this.clients = false;
-					}
+          if (this.route == 'Inputs') {
+            this.inputs = true;
+          } else {
+            this.inputs = false;
 
-					if (this.route == 'Balance') {
-						this.balance = true;
-					} else {
-						this.balance = false;
 					}
+          if (this.route == 'Clients') {
+            this.clients = true;
+          } else {
+            this.clients = false;
+          }
 
 					if (this.route == 'Users') {
 						this.users = true;
