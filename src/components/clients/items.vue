@@ -7,8 +7,8 @@
 
 	<div v-else-if="status === 'show'" class="search-results-content">
 
-		<div class="payment selected1" v-for="item in items" v-on:click="showDetails(item)">
-			<div class="search-results-item search-results-choose"><span class="circle"></span></div>
+		<div class="payment selected1" v-for="item in items" v-on:click="showDetails(item)" >
+			<div class="search-results-item search-results-choose"><span class="circle" style="background: #8bc34a;"></span></div>
       <div class="search-results-item search-results-transfer">{{ item.first_name }}</div>
       <div class="search-results-item search-results-transfer" >{{ item.last_name }}</div>
       <div class="search-results-item search-results-transfer">{{ item.username }}</div>

@@ -8,12 +8,12 @@
 				</section>
 			</main>
 		</div>
-	</div>	
+	</div>
 </template>
 
 <script>
 import navbar from '@/components/common/navbar';
-import phoneFormEdit from '@/components/phones/form-edit';
+import phoneFormEdit from '@/components/clients/form-edit';
 
 export default {
 	name: 'phone-edit',

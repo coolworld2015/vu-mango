@@ -8,8 +8,8 @@ import Test3 from '@/components/common/test3';
 import Test4 from '@/components/common/test4';
 import Test5 from '@/components/common/test5';
 
-import Phones from '@/components/phones/phones';
-import PhoneEdit from '@/components/phones/edit';
+import Clients from '@/components/clients/clients';
+import PhoneEdit from '@/components/clients/edit';
 
 import Users from '@/components/users/users';
 import UserEdit from '@/components/users/edit';
@@ -27,7 +27,7 @@ export default new Router({
     { path: '/test4', component: Test4 },
     { path: '/test5', component: Test5 },
 
-	{ path: '/phones', component: Phones },
+	{ path: '/clients', component: Clients },
 	{ path: '/phone-edit', component: PhoneEdit },
 
     { path: '/users', component: Users },

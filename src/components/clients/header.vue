@@ -1,7 +1,7 @@
 <template>
 	<header class="header d-flex justify-content-center align-items-center">
 		<form v-show="name" class="search-form" id="search" style="display: block; position: absolute; top: -55px;">
-			<input type="text" class="form-control" placeholder="Search by name"
+			<input type="text" class="form-control" placeholder="Search by e-mail"
 				v-model="searchQuery" v-on:click="searchClear" v-on:keyup="changeView">
 
 			<div v-on:click="searchName">

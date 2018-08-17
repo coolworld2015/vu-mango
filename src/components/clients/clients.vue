@@ -4,10 +4,10 @@
 		<div class="content">
 			<main>
 				<section class="search-results">
-					<phones-header></phones-header> 
+					<phones-header></phones-header>
 					<phones-items></phones-items>
 				</section>
-				<phones-footer></phones-footer> 
+				<phones-footer></phones-footer>
 			</main>
 		</div>
 	</div>
@@ -16,25 +16,25 @@
 <script>
 import appConfig from '../../main';
 import navbar from '@/components/common/navbar';
-import phonesHeader from '@/components/phones/header';
-import phonesItems from '@/components/phones/items';
-import phonesFooter from '@/components/phones/footer';
+import phonesHeader from '@/components/clients/header';
+import phonesItems from '@/components/clients/items';
+import phonesFooter from '@/components/clients/footer';
 
 export default {
-  name: 'phones',
+  name: 'clients',
   data () {
     return {
-      route: 'Phones'
+      route: 'Clients'
     }
   },
 	created() {
 		appConfig.getAccessToken();
 		if (appConfig.access_token == 'login') {
 			this.$router.push('login');
-		} 
- 
-		appConfig.route = this.route;		
-		appConfig.http = true;			
+		}
+
+		appConfig.route = this.route;
+		appConfig.http = true;
 	},
 	components: {
 		navbar,

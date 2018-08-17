@@ -30,8 +30,8 @@
           <span class="fp-nav-link">Balance</span>
         </li>
 
-        <li class="fp-nav-item fp-nav-item-right" v-on:click="changeRoute('phones')"
-            v-bind:class="{ active: phones }">
+        <li class="fp-nav-item fp-nav-item-right" v-on:click="changeRoute('clients')"
+            v-bind:class="{ active: clients }">
           <span class="fp-nav-link">Clients</span>
         </li>
 
@@ -58,19 +58,21 @@
 					<span class="hot-key-hint">2</span>
 				</li>
 -->
-<!--				<li class="fp-nav-item fp-nav-item-left" v-on:click="changeRoute('audits')"
+<!--		<li class="fp-nav-item fp-nav-item-left" v-on:click="changeRoute('audits')"
 					v-bind:class="{ active: audits }">
 					<span class="fp-nav-link" title="Audits">AU</span>
 					<span class="hot-key-hint">4</span>
-				</li>-->
+				</li>
+-->
+
 				<li class="fp-nav-item fp-nav-item-left" v-on:click="changeRoute('balance')"
 					v-bind:class="{ active: balance }">
 					<span class="fp-nav-link" title="Balance">BA</span>
 					<span class="hot-key-hint">5</span>
 				</li>
 
-        <li class="fp-nav-item fp-nav-item-left" v-on:click="changeRoute('phones')"
-            v-bind:class="{ active: phones }">
+        <li class="fp-nav-item fp-nav-item-left" v-on:click="changeRoute('clients')"
+            v-bind:class="{ active: clients }">
           <span class="fp-nav-link" title="Clients">CL</span>
           <span class="hot-key-hint">2</span>
         </li>
@@ -95,7 +97,7 @@ export default {
 				searchQuery: '',
 				route: appConfig.route,
 				isActive: false,
-				phones: null,
+        clients: null,
 				find: null,
         balance: null,
 				users: null,
@@ -121,10 +123,10 @@ export default {
 						this.find = false;
 					}
 
-					if (this.route == 'Phones') {
-						this.phones = true;
+					if (this.route == 'Clients') {
+						this.clients = true;
 					} else {
-						this.phones = false;
+						this.clients = false;
 					}
 
 					if (this.route == 'Balance') {
