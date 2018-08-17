@@ -57,7 +57,7 @@ export default {
 					// localStorage.setItem('access_token', 'dcGi7WqWg1inskUjBpdWFXPkQSM9HuOyNyjmeLNPi3mtMxOfTdDTYMTo9n5HPrvd');
   this.loading = false
   this.error = false
-  this.$router.push('/phones')
+  this.$router.push('/balance')
 })
 				.catch((error) => {
   this.loading = false

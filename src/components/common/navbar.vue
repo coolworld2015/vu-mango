@@ -3,7 +3,7 @@
 		<nav class="h-100 fp-navbar" onclick="event.preventDefault();return false">
 			<ul class="h-100 fp-nav-right">
 				<li v-on:click="changeView()">
-					<img src="../../assets/img/logo.jpg" style="width1: 242px; height: 55px; margin-left: 8px; margin-right: 10px; margin-top: -5px;"
+					<img src="../../assets/img/logo.jpg" style="width1: 242px; height: 55px; margin-left: 3px; margin-right: 10px; margin-top: -5px;"
 						v-on:click="changeView()"
 					/>
 					<span style="font-weight: bold; color: white; font-size: 20px; text-shadow: #000 0.15em 0.15em 0.15em;">
@@ -11,13 +11,9 @@
 					</span>
 				</li>
 				<li class="fp-nav-item fp-nav-item-right">
-				  <span class="fp-nav-link menu-block-header">ValueCoin by Mangosoft</span>
+				  <span class="fp-nav-link menu-block-header">by Mangosoft</span>
 				</li>
 
-				<li class="fp-nav-item fp-nav-item-right" v-on:click="changeRoute('phones')"
-					v-bind:class="{ active: phones }">
-					<span class="fp-nav-link">Customers</span>
-				</li>
 <!--
 				<li class="fp-nav-item fp-nav-item-right" v-on:click="changeRoute('phones')"
 					v-bind:class="{ active: find }">
@@ -26,12 +22,19 @@
 -->
 <!--				<li class="fp-nav-item fp-nav-item-right" v-on:click="changeRoute('audits')"
 					v-bind:class="{ active: audits }">
-					<span class="fp-nav-link">Audits</span>-->
-				</li>
-				<li class="fp-nav-item fp-nav-item-right" v-on:click="changeRoute('users')"
-					v-bind:class="{ active: users }">
-					<span class="fp-nav-link">Balance</span>
-				</li>
+					<span class="fp-nav-link">Audits</span>
+				</li>-->
+
+        <li class="fp-nav-item fp-nav-item-right" v-on:click="changeRoute('balance')"
+            v-bind:class="{ active: balance }">
+          <span class="fp-nav-link">Balance</span>
+        </li>
+
+        <li class="fp-nav-item fp-nav-item-right" v-on:click="changeRoute('phones')"
+            v-bind:class="{ active: phones }">
+          <span class="fp-nav-link">Customers</span>
+        </li>
+
 				<li class="fp-nav-item fp-nav-item-right" v-on:click="changeRoute('')"
 					v-bind:class="{ active: logout }">
 					<span class="fp-nav-link">Logout</span>
@@ -40,7 +43,7 @@
 
 			<ul class="h-100 fp-nav-left">
 				<li class="fp-nav-item fp-nav-item-left li-border-bottom" v-on:click="changeView()">
-					<span class="fp-nav-link" id="showNav" title="Mangosoft">VC</span>
+					<span class="fp-nav-link" id="showNav" title="ValueCoin">VC</span>
 					<span class="hot-key-hint">~</span>
 				</li>
 				<li class="fp-nav-item fp-nav-item-left">
@@ -48,11 +51,6 @@
 				  <span class="hot-key-hint">1</span>
 				</li>
 
-				<li class="fp-nav-item fp-nav-item-left" v-on:click="changeRoute('phones')"
-					v-bind:class="{ active: phones }">
-					<span class="fp-nav-link" title="Customers">CS</span>
-					<span class="hot-key-hint">2</span>
-				</li>
 <!--
 				<li class="fp-nav-item fp-nav-item-left" v-on:click="changeRoute('phones')"
 					v-bind:class="{ active: find }">
@@ -65,11 +63,18 @@
 					<span class="fp-nav-link" title="Audits">AU</span>
 					<span class="hot-key-hint">4</span>
 				</li>-->
-				<li class="fp-nav-item fp-nav-item-left" v-on:click="changeRoute('users')"
-					v-bind:class="{ active: users }">
+				<li class="fp-nav-item fp-nav-item-left" v-on:click="changeRoute('balance')"
+					v-bind:class="{ active: balance }">
 					<span class="fp-nav-link" title="Balance">BA</span>
 					<span class="hot-key-hint">5</span>
 				</li>
+
+        <li class="fp-nav-item fp-nav-item-left" v-on:click="changeRoute('phones')"
+            v-bind:class="{ active: phones }">
+          <span class="fp-nav-link" title="Customers">CS</span>
+          <span class="hot-key-hint">2</span>
+        </li>
+
 				<li class="fp-nav-item fp-nav-item-left" v-on:click="changeRoute('')"
 					v-bind:class="{ active: logout }">
 					<span class="fp-nav-link" title="Logout">LO</span>
@@ -92,7 +97,7 @@ export default {
 				isActive: false,
 				phones: null,
 				find: null,
-				audits: null,
+        balance: null,
 				users: null,
 				login: null,
 				logout: null,
@@ -122,10 +127,10 @@ export default {
 						this.phones = false;
 					}
 
-					if (this.route == 'Audits') {
-						this.audits = true;
+					if (this.route == 'Balance') {
+						this.balance = true;
 					} else {
-						this.audits = false;
+						this.balance = false;
 					}
 
 					if (this.route == 'Users') {

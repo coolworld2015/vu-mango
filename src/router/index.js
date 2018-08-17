@@ -15,8 +15,7 @@ import Users from '@/components/users/users';
 import UserEdit from '@/components/users/edit';
 import UserAdd from '@/components/users/add';
 
-import Audits from '@/components/audits/audits';
-import AuditsEdit from '@/components/audits/edit';
+import Balance from '@/components/balance/balance';
 
 export default new Router({
   routes: [
@@ -27,15 +26,15 @@ export default new Router({
     { path: '/test3', component: Test3 },
     { path: '/test4', component: Test4 },
     { path: '/test5', component: Test5 },
-		
+
 	{ path: '/phones', component: Phones },
 	{ path: '/phone-edit', component: PhoneEdit },
-	
+
     { path: '/users', component: Users },
     { path: '/user-edit', component: UserEdit },
     { path: '/user-add', component: UserAdd },
 
-	{ path: '/audits', component: Audits },
-	{ path: '/audit-edit', component: AuditsEdit }
+	{ path: '/balance', component: Balance },
+	{ path: '/audit-edit', component: UserEdit }
   ]
 })

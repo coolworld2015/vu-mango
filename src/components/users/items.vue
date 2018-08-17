@@ -7,12 +7,11 @@
   </div>
 
   <div v-else-if="status === 'show'" class="search-results-content">
-    <div class="payment" v-for="item in items" v-on:click="showDetails(item)">
+    <div class="payment" v-for="item in items" v-on:click1="showDetails(item)">
       <div class="search-results-item search-results-choose" style="width: 5%;"><span class="circle"></span></div>
-      <div class="search-results-item search-results-transfer" style="width: 25%;">{{ item.status }}</div>
-      <div class="search-results-item search-results-sender" style="width: 20%;">{{ item.balance }}</div>
-      <div class="search-results-item search-results-transfer" style="width: 20%;">{{ item.pass }}</div>
-      <div class="search-results-item search-results-transfer" style="width: 20%;">{{ item.description }}</div>
+
+      <div class="search-results-item search-results-sender" style="width: 20%;">{{((+item.data.balance ).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}}</div>
+
 
     </div>
   </div>
@@ -66,13 +65,12 @@ export default {
 	},
 	methods: {
 		fetchData() {
-			//this.$http.get(appConfig.URL + 'users/get', {headers: {'Authorization': appConfig.access_token}})
       this.$http.get('http://94.130.206.254/api/Customers/getbalance?access_token=' + appConfig.access_token)
 				.then(result => {
-          appConfig.users.items = result.data;
-					this.items = result.data;
-
-					this.filteredItems = result.data;
+          appConfig.users.items = [].concat(result.data);
+					this.items = [].concat(result.data);
+console.log(this.items)
+					this.filteredItems = [].concat(result.data);
 					this.status = 'show';
 					appConfig.$emit('itemsCount', result.data.length);
 					setTimeout(()=>{document.querySelector('.search-results-content').addEventListener('scroll', this.handleScroll)}, 100);
