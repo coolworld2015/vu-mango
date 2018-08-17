@@ -48,7 +48,8 @@ export default {
 	  }
 	},
 	created() {
-		this.items = appConfig.phones.items.sort(this.sort).slice(0, 20);
+    this.fetchData();
+		//this.items = appConfig.phones.items.sort(this.sort).slice(0, 20);
 		this.filteredItems = appConfig.phones.items.sort(this.sort);
 		setTimeout(()=> {
 			if (document.querySelector('.search-results-content')) {
