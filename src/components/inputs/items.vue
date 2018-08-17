@@ -9,10 +9,13 @@
 
 		<div class="payment selected1" v-for="item in items" v-on:click="showDetails(item)" >
 			<div class="search-results-item search-results-choose"><span class="circle" style="background: #8bc34a;"></span></div>
+      <div class="search-results-item search-results-sender">{{ item.from.email }}</div>
+      <div class="search-results-item search-results-transfer">{{ item.value }}</div>
+      <div class="search-results-item search-results-transfer">{{ item.date }}</div>
       <div class="search-results-item search-results-transfer">{{ item.from.first_name }}</div>
       <div class="search-results-item search-results-transfer" >{{ item.from.last_name }}</div>
       <div class="search-results-item search-results-transfer">{{ item.from.username }}</div>
-      <div class="search-results-item search-results-sender">{{ item.from.email }}</div>
+
 
 
 			<div class="search-results-item search-results-result long-term">

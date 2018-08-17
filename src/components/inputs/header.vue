@@ -24,10 +24,13 @@
 
 		<div class="search-results-header">
 			<div class="search-results-item search-results-choose"></div>
+      <div class="search-results-item search-results-sender" style="left: 25px;">E-mail</div>
+			<div class="search-results-item search-results-transfer" style="left: 1px;" v-on:click="changeSearch('name')">Amount</div>
+			<div class="search-results-item search-results-transfer" style="left: 1px;" v-on:click="changeSearch('name')">Date</div>
 			<div class="search-results-item search-results-transfer" style="left: 1px;" v-on:click="changeSearch('name')">First name</div>
 			<div class="search-results-item search-results-transfer" style="left: 0px;" v-on:click="changeSearch('phone')">Last name</div>
 			<div class="search-results-item search-results-transfer" style="left: 0px;">Username</div>
-			<div class="search-results-item search-results-sender" style="left: 25px;">E-mail</div>
+
 
 			<div class="search-results-item search-results-result" style="left: 15px;">ID</div>
 		</div>
