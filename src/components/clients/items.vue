@@ -147,7 +147,6 @@ export default {
 	methods: {
 		fetchData() {
 			this.status = 'loading';
-			//this.$http.get(appConfig.URL + 'items/get', {headers: {'Authorization': appConfig.access_token}})
 			this.$http.get('http://94.130.206.254/api/Customers?access_token=' + appConfig.access_token)
 				.then(result => {
 				  console.log(result);

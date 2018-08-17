@@ -9,10 +9,10 @@
 
 		<div class="payment selected1" v-for="item in items" v-on:click="showDetails(item)" >
 			<div class="search-results-item search-results-choose"><span class="circle" style="background: #8bc34a;"></span></div>
-      <div class="search-results-item search-results-transfer">{{ item.first_name }}</div>
-      <div class="search-results-item search-results-transfer" >{{ item.last_name }}</div>
-      <div class="search-results-item search-results-transfer">{{ item.username }}</div>
-      <div class="search-results-item search-results-sender">{{ item.email }}</div>
+      <div class="search-results-item search-results-transfer">{{ item.from.first_name }}</div>
+      <div class="search-results-item search-results-transfer" >{{ item.from.last_name }}</div>
+      <div class="search-results-item search-results-transfer">{{ item.from.username }}</div>
+      <div class="search-results-item search-results-sender">{{ item.from.email }}</div>
 
 
 			<div class="search-results-item search-results-result long-term">
@@ -145,24 +145,39 @@ export default {
 		})
 	},
 	methods: {
-		fetchData() {
-			this.status = 'loading';
-			//this.$http.get(appConfig.URL + 'items/get', {headers: {'Authorization': appConfig.access_token}})
-			this.$http.get('http://94.130.206.254/api/Customers?access_token=' + appConfig.access_token)
-				.then(result => {
-				  console.log(result);
-					appConfig.phones.items = result.data.sort(this.sort);
-					this.items = result.data.sort(this.sort).slice(0, 20);
-					this.filteredItems = result.data.sort(this.sort);
-					this.status = 'show';
-					appConfig.$emit('itemsCount', result.data.length);
-					setTimeout(()=>{document.querySelector('.search-results-content').addEventListener('scroll', this.handleScroll)}, 100);
-				}).catch((error)=> {
-					appConfig.notifications.items.push(this.notification);
-					this.status = 'show';
-					this.$router.push('/login');
-				})
-		},
+    fetchData() {
+      this.status = 'loading';
+      this.$http.get('http://94.130.206.254/api/Customers/transactions-list?access_token=' + appConfig.access_token)
+        .then(result => {
+          let customer = result.data.data.customer.email;
+          console.log(result.data.data);
+          let data = result.data.data.transactions.reverse();
+
+          this.status = 'show';
+          this.items = data;
+
+/*          data.forEach((el) =>{
+            if (el.from.email) {
+              if (el.from.email.toLowerCase() !== customer) {
+                this.items.push(el)
+                console.log(this.items);
+              }
+            }
+          });*/
+
+          //appConfig.phones.items = result.data.sort(this.sort);
+          //this.items = result.data.sort(this.sort).slice(0, 20);
+
+          //this.filteredItems = result.data.sort(this.sort);
+          this.status = 'show';
+          //appConfig.$emit('itemsCount', result.data.length);
+          setTimeout(()=>{document.querySelector('.search-results-content').addEventListener('scroll', this.handleScroll)}, 100);
+        }).catch((error)=> {
+        //appConfig.notifications.items.push(this.notification);
+        //this.status = 'show';
+        //this.$router.push('/login');
+      })
+    },
 		handleScroll() {
 			var position = document.querySelector('.search-results-content').scrollTop;
 			var items, positionY, recordsCount;

@@ -8,12 +8,12 @@
 				</section>
 			</main>
 		</div>
-	</div>	
+	</div>
 </template>
 
 <script>
 import navbar from '@/components/common/navbar';
-import userFormAdd from '@/components/users/form-add';
+import userFormAdd from '@/components/inputs/form-add';
 
 export default {
 	name: 'user-add',
