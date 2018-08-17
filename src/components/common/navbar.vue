@@ -3,15 +3,15 @@
 		<nav class="h-100 fp-navbar" onclick="event.preventDefault();return false">
 			<ul class="h-100 fp-nav-right">
 				<li v-on:click="changeView()">
-					<img src="../../assets/img/logo.jpg" style="width: 242px; height: 55px; margin-left: 8px; margin-right: 10px; margin-top: -5px;"
+					<img src="../../assets/img/logo.jpg" style="width1: 242px; height: 55px; margin-left: 8px; margin-right: 10px; margin-top: -5px;"
 						v-on:click="changeView()"
 					/>
 					<span style="font-weight: bold; color: white; font-size: 20px; text-shadow: #000 0.15em 0.15em 0.15em;">
-
+            ValueCoin-Demo
 					</span>
 				</li>
 				<li class="fp-nav-item fp-nav-item-right">
-				  <span class="fp-nav-link menu-block-header">Mangosoft-Demo</span>
+				  <span class="fp-nav-link menu-block-header">ValueCoin by Mangosoft</span>
 				</li>
 
 				<li class="fp-nav-item fp-nav-item-right" v-on:click="changeRoute('phones')"
@@ -40,7 +40,7 @@
 
 			<ul class="h-100 fp-nav-left">
 				<li class="fp-nav-item fp-nav-item-left li-border-bottom" v-on:click="changeView()">
-					<span class="fp-nav-link" id="showNav" title="Mangosoft">MS</span>
+					<span class="fp-nav-link" id="showNav" title="Mangosoft">VC</span>
 					<span class="hot-key-hint">~</span>
 				</li>
 				<li class="fp-nav-item fp-nav-item-left">
