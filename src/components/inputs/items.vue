@@ -10,8 +10,9 @@
 		<div class="payment selected1" v-for="item in items" v-on:click="showDetails(item)" >
 			<div class="search-results-item search-results-choose"><span class="circle" style="background: #8bc34a;"></span></div>
       <div class="search-results-item search-results-sender">{{ item.from.email }}</div>
-      <div class="search-results-item search-results-transfer">{{ item.value }}</div>
-      <div class="search-results-item search-results-transfer">{{ item.date }}</div>
+      <div class="search-results-item search-results-transfer">{{ ((+item.value).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ") }}</div>
+
+      <div class="search-results-item search-results-transfer">{{ item.date.split('T')[0] }} {{ item.date.split('T')[1].split('.')[0]}}</div>
       <div class="search-results-item search-results-transfer">{{ item.from.first_name }}</div>
       <div class="search-results-item search-results-transfer" >{{ item.from.last_name }}</div>
       <div class="search-results-item search-results-transfer">{{ item.from.username }}</div>
@@ -156,30 +157,25 @@ export default {
           let customer = result.data.data.customer.email;
           console.log(result.data.data);
           let data = result.data.data.transactions.reverse();
-
           this.status = 'show';
-          this.items = data;
 
-/*          data.forEach((el) =>{
+          data.forEach((el) =>{
             if (el.from.email) {
               if (el.from.email.toLowerCase() !== customer) {
-                this.items.push(el)
+                this.items.push(el);
                 console.log(this.items);
               }
             }
-          });*/
+          });
 
-          //appConfig.phones.items = result.data.sort(this.sort);
-          //this.items = result.data.sort(this.sort).slice(0, 20);
-
-          //this.filteredItems = result.data.sort(this.sort);
+          this.filteredItems = data;
           this.status = 'show';
-          //appConfig.$emit('itemsCount', result.data.length);
+          appConfig.$emit('itemsCount', this.items.length);
           setTimeout(()=>{document.querySelector('.search-results-content').addEventListener('scroll', this.handleScroll)}, 100);
-        }).catch((error)=> {
-        //appConfig.notifications.items.push(this.notification);
-        //this.status = 'show';
-        //this.$router.push('/login');
+        }).catch(()=> {
+          appConfig.notifications.items.push(this.notification);
+          this.status = 'show';
+          this.$router.push('/login');
       })
     },
 		handleScroll() {
