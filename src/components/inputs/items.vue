@@ -19,7 +19,7 @@
 
 
 
-			<div class="search-results-item search-results-result long-term" style="right:75px;">
+			<div class="search-results-item search-results-result long-term" style="right:65px;">
 				<span class="search-results-icon"></span>
 				{{ item.id }}
 			</div>
@@ -53,7 +53,7 @@ export default {
 	},
 	created() {
     this.fetchData();
-		//this.items = appConfig.phones.items.sort(this.sort).slice(0, 20);
+/*		//this.items = appConfig.phones.items.sort(this.sort).slice(0, 20);
 		this.filteredItems = appConfig.phones.items.sort(this.sort);
 		setTimeout(()=> {
 			if (document.querySelector('.search-results-content')) {
@@ -151,11 +151,12 @@ export default {
 						appConfig.http = true;
 					})
 				}
-		})
+		})*/
 	},
 	methods: {
     fetchData() {
       this.status = 'loading';
+      this.items = [];
       this.$http.get('http://94.130.206.254/api/Customers/transactions-list?access_token=' + appConfig.access_token)
         .then(result => {
           let customer = result.data.data.customer.email;

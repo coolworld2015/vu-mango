@@ -32,7 +32,7 @@
 			<div class="search-results-item search-results-transfer" style="left: 0px;">Username</div>
 
 
-			<div class="search-results-item search-results-result" style="left: 15px;">ID</div>
+			<div class="search-results-item search-results-result" style="right: 40px;">ID</div>
 		</div>
 	</header>
 </template>
