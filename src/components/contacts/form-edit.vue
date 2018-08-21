@@ -7,46 +7,46 @@
 
 	<div v-else>
 		<div style="margin: auto; width: 25%; font-size: 22px; font-weight: bold; margin-bottom: 10px;">
-			<div style="text-align: center; padding-right: 40px;">{{ name }}</div>
+			<div style="text-align: center; padding-right: 40px;">{{ firstName }}</div>
 		</div>
 		<form class="payment-form payment-form--create d-flex justify-content-stretch" autocomplete="off">
 		  <fieldset class="sender-data form-section-wrapper">
 			<div class="form-section" style="width: 100%;">
 			  <div class="form-group">
-				<label for="senderSurname">Name</label>
-				<input type="text" class="form-control" id="senderSurname" placeholder="Name" v-model="name">
+				<label for="senderSurname">First Name</label>
+				<input type="text" class="form-control" id="senderSurname" placeholder="First Name" v-model="firstName">
 				<div class="invalid-feedback">
 				  Будь ласка, коректно вкажіть прізвище відправника.
 				</div>
 			  </div>
 
 			  <div class="form-group">
-				<label for="senderName">Phone</label>
-				<input type="text" class="form-control" id="senderName" placeholder="Phone" v-model="phone">
+				<label for="senderName">Last Name</label>
+				<input type="text" class="form-control" id="senderName" placeholder="Last Name" v-model="lastName">
 				<div class="invalid-feedback">
 				  Будь ласка, коректно вкажіть ім'я відправника.
 				</div>
 			  </div>
 
 			  <div class="form-group">
-				<label for="senderPatronymic">Street</label>
-				<input type="text" class="form-control" id="senderPatronymic1" placeholder="Street" v-model="street">
+				<label for="senderPatronymic1">Username</label>
+				<input type="text" class="form-control" id="senderPatronymic1" placeholder="Username" v-model="username">
 				<div class="invalid-feedback">
 				  Будь ласка, коректно вкажіть по-батькові відправника.
 				</div>
 			  </div>
 
 			  <div class="form-group">
-				<label for="senderPatronymic">House</label>
-				<input type="text" class="form-control" id="senderPatronymic1" placeholder="House" v-model="house">
+				<label for="senderPatronymic2">E-mail</label>
+				<input type="text" class="form-control" id="senderPatronymic2" placeholder="E-mail" v-model="email">
 				<div class="invalid-feedback">
 				  Будь ласка, коректно вкажіть по-батькові відправника.
 				</div>
 			  </div>
 
 			  <div class="form-group">
-				<label for="senderPatronymic">Apt</label>
-				<input type="text" class="form-control" id="senderPatronymic1" placeholder="Apt" v-model="id">
+				<label for="senderPatronymic3">ID</label>
+				<input type="text" class="form-control" id="senderPatronymic3" placeholder="ID" v-model="id">
 				<div class="invalid-feedback">
 				  Будь ласка, коректно вкажіть по-батькові відправника.
 				</div>
@@ -94,17 +94,15 @@ export default {
 				if (appConfig.item) {
 
 					this.id = appConfig.item.id;
-					this.name = appConfig.item.first_name;
-					this.phone = appConfig.item.email;
-					this.street = appConfig.item.last_name;
-					this.house = appConfig.item.username;
-					this.apt = appConfig.item.password;
-					this.index = appConfig.item.index;
+					this.firstName = appConfig.item.first_name;
+          this.lastName = appConfig.item.last_name;
+          this.username = appConfig.item.username;
+          this.email = appConfig.item.email;
 				}
 			}
 		},
 		goBack() {
-			this.$router.push('/clients');
+			this.$router.push('/contacts');
 		}
 	}
 }

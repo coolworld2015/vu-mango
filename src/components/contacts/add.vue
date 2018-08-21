@@ -8,15 +8,15 @@
 				</section>
 			</main>
 		</div>
-	</div>	
+	</div>
 </template>
 
 <script>
 import navbar from '@/components/common/navbar';
-import userFormAdd from '@/components/users/form-add';
+import userFormAdd from '@/components/contacts/form-add';
 
 export default {
-	name: 'user-add',
+	name: 'contact-add',
 	components: {
 		navbar:	navbar,
 		userFormAdd: userFormAdd

@@ -16,15 +16,15 @@
 <script>
 import appConfig from '../../main';
 import navbar from '@/components/common/navbar';
-import phonesHeader from '@/components/clients/header';
-import phonesItems from '@/components/clients/items';
-import phonesFooter from '@/components/clients/footer';
+import phonesHeader from '@/components/contacts/header';
+import phonesItems from '@/components/contacts/items';
+import phonesFooter from '@/components/contacts/footer';
 
 export default {
-  name: 'clients',
+  name: 'contacts',
   data () {
     return {
-      route: 'Clients'
+      route: 'Contacts'
     }
   },
 	created() {
