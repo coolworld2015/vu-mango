@@ -12,14 +12,14 @@
       <div class="search-results-item search-results-sender">{{ item.from.email }}</div>
       <div class="search-results-item search-results-transfer">{{ ((+item.value).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ") }}</div>
 
-      <div class="search-results-item search-results-transfer">{{ item.date.split('T')[0] }} {{ item.date.split('T')[1].split('.')[0]}}</div>
+      <div class="search-results-item search-results-transfer" style="right: 35px;">{{ item.date.split('T')[0] }} {{ item.date.split('T')[1].split('.')[0]}}</div>
       <div class="search-results-item search-results-transfer">{{ item.from.first_name }}</div>
-      <div class="search-results-item search-results-transfer" >{{ item.from.last_name }}</div>
+      <div class="search-results-item search-results-transfer">{{ item.from.last_name }}</div>
       <div class="search-results-item search-results-transfer">{{ item.from.username }}</div>
 
 
 
-			<div class="search-results-item search-results-result long-term">
+			<div class="search-results-item search-results-result long-term" style="right:75px;">
 				<span class="search-results-icon"></span>
 				{{ item.id }}
 			</div>
@@ -70,11 +70,13 @@ export default {
 			title: 'Something went wrong',
 			message: 'Server responded with status code error',
 			important: true
-		}
+		};
+
 		appConfig.$on('clearHeader', () => {
 			this.status = 'show';
 			setTimeout(()=>{document.querySelector('.search-results-content').addEventListener('scroll', this.handleScroll)}, 100);
-		})
+		});
+
 		appConfig.$on('searchQueryPhones', (searchQuery, searchType) => {
 			this.searchQuery = searchQuery;
 			let arr = [].concat(appConfig.phones.items);
@@ -97,7 +99,8 @@ export default {
 				this.items = appConfig.phones.items.slice(0, 20);
 				this.filteredItems = appConfig.phones.items;
 			}
-		})
+		});
+
 		appConfig.$on('searchName', searchQuery => {
 				this.status = 'loading';
 				if (!appConfig.http) {
@@ -122,7 +125,8 @@ export default {
 						appConfig.http = true;
 					})
 				}
-		}),
+		});
+
 		appConfig.$on('searchPhone', searchQuery => {
 				this.status = 'loading';
 				if (!appConfig.http) {
@@ -168,7 +172,7 @@ export default {
             }
           });
 
-          this.filteredItems = data;
+          this.filteredItems = [].concat(this.items);
           this.status = 'show';
           appConfig.$emit('itemsCount', this.items.length);
           setTimeout(()=>{document.querySelector('.search-results-content').addEventListener('scroll', this.handleScroll)}, 100);
