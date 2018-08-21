@@ -35,9 +35,14 @@
           <span class="fp-nav-link">Received</span>
         </li>
 
+        <li class="fp-nav-item fp-nav-item-right" v-on:click="changeRoute('outputs')"
+            v-bind:class="{ active: outputs }">
+          <span class="fp-nav-link">Send</span>
+        </li>
+
         <li class="fp-nav-item fp-nav-item-right" v-on:click="changeRoute('clients')"
             v-bind:class="{ active: clients }">
-          <span class="fp-nav-link">Clients</span>
+          <span class="fp-nav-link">Contacts</span>
         </li>
 
 				<li class="fp-nav-item fp-nav-item-right" v-on:click="changeRoute('')"
@@ -82,9 +87,15 @@
           <span class="hot-key-hint">2</span>
         </li>
 
+        <li class="fp-nav-item fp-nav-item-left" v-on:click="changeRoute('outputs')"
+            v-bind:class="{ active: outputs }">
+          <span class="fp-nav-link" title="Send">SE</span>
+          <span class="hot-key-hint">2</span>
+        </li>
+
         <li class="fp-nav-item fp-nav-item-left" v-on:click="changeRoute('clients')"
             v-bind:class="{ active: clients }">
-          <span class="fp-nav-link" title="Clients">CL</span>
+          <span class="fp-nav-link" title="Contacts">CO</span>
           <span class="hot-key-hint">2</span>
         </li>
 
@@ -111,6 +122,7 @@ export default {
 
         balance: null,
         inputs: null,
+        outputs: null,
         clients: null,
 
 				users: null,
@@ -140,8 +152,14 @@ export default {
             this.inputs = true;
           } else {
             this.inputs = false;
-
 					}
+
+					if (this.route == 'Outputs') {
+            this.outputs = true;
+          } else {
+            this.outputs = false;
+					}
+
           if (this.route == 'Clients') {
             this.clients = true;
           } else {
