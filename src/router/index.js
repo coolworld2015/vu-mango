@@ -10,6 +10,7 @@ import Outputs from '@/components/outputs/outputs';
 
 import Contacts from '@/components/contacts/contacts';
 import ContactEdit from '@/components/contacts/edit';
+import ContactAdd from '@/components/contacts/add';
 
 export default new Router({
   routes: [
@@ -22,6 +23,7 @@ export default new Router({
     { path: '/outputs', component: Outputs },
 
     { path: '/contacts', component: Contacts },
-    { path: '/contact-edit', component: ContactEdit }
+    { path: '/contact-edit', component: ContactEdit },
+    { path: '/contact-add', component: ContactAdd }
   ]
 })

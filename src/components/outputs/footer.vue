@@ -4,6 +4,12 @@
 			<span class="selected-payments" id="activatedPaymentsBox" style="width: 44px;">{{ count }}</span>
 			Records
 		</div>
+    <div class="activated-payments-item" v-on:click="addItem">
+      <button class="" id="cancelSelection">
+        <svg class="activated-payments-svg"><use xlink:href="#plus"></use></svg>
+        New transfer
+      </button>
+    </div>
 <!--
 		<div class="activated-payments-item" v-on:click="addItem">
 			<button class="" id="cancelSelection">
@@ -30,9 +36,9 @@
 			Виділити
 			<span class="hint">esc</span>
 			Зняти виділення
-		</div> 
+		</div>
 -->
-	</section>	
+	</section>
 </template>
 
 <script>
@@ -48,12 +54,12 @@ export default {
 	created() {
 		appConfig.$on('itemsCount', itemsCount => {
 			this.count = itemsCount;
-		})			
+		})
 	},
-	methods: {		
+	methods: {
 		addItem(){
 			this.$router.push('user-add');
-		}	
+		}
 	}
 }
 </script>

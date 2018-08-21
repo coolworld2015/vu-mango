@@ -72,10 +72,11 @@ export default {
 	name: 'users-edit',
 	data() {
 		return {
-			name: '',
+      firstName: '',
+      lastName: '',
+      username: '',
       email: '',
-			street: '',
-			house: '',
+      password: '',
 			id: '',
 			index: '',
 			loading: false
