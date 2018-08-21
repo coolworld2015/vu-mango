@@ -18,6 +18,7 @@ import Balance from '@/components/balance/balance';
 import Inputs from '@/components/inputs/inputs';
 import Outputs from '@/components/outputs/outputs';
 import Clients from '@/components/clients/clients';
+import ContactEdit from '@/components/clients/edit';
 
 export default new Router({
   routes: [
@@ -39,6 +40,7 @@ export default new Router({
     { path: '/inputs', component: Inputs },
     { path: '/outputs', component: Outputs },
     { path: '/clients', component: Clients },
+    { path: '/contact-edit', component: ContactEdit },
 
   ]
 })

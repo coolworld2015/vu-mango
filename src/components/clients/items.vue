@@ -184,8 +184,8 @@ export default {
 			}
 		},
 		showDetails(item){
-			appConfig.phone = item;
-			this.$router.push('phone-edit');
+			appConfig.item = item;
+			this.$router.push('contact-edit');
 		},
 		sort(a, b) {
 			let nameA = a.username.toLowerCase(), nameB = b.username.toLowerCase();

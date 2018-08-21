@@ -4,7 +4,7 @@
 			 <img src="../../assets/img/loading.gif">
 		</div>
 	</div>
-	
+
 	<div v-else>
 		<div style="margin: auto; width: 25%; font-size: 22px; font-weight: bold; margin-bottom: 10px;">
 			<div style="text-align: center; padding-right: 40px;">{{ name }}</div>
@@ -35,23 +35,23 @@
 				  Будь ласка, коректно вкажіть по-батькові відправника.
 				</div>
 			  </div>
-			  
+
 			  <div class="form-group">
 				<label for="senderPatronymic">House</label>
 				<input type="text" class="form-control" id="senderPatronymic1" placeholder="House" v-model="house">
 				<div class="invalid-feedback">
 				  Будь ласка, коректно вкажіть по-батькові відправника.
 				</div>
-			  </div>			  
-			  
+			  </div>
+
 			  <div class="form-group">
 				<label for="senderPatronymic">Apt</label>
 				<input type="text" class="form-control" id="senderPatronymic1" placeholder="Apt" v-model="apt">
 				<div class="invalid-feedback">
 				  Будь ласка, коректно вкажіть по-батькові відправника.
 				</div>
-			  </div>			
-			  
+			  </div>
+
 			  <div class="form-group">
 				<label for="senderPatronymic">ZIP Code</label>
 				<input type="text" class="form-control" id="senderPatronymic1" placeholder="ZIP Code" v-model="index">
@@ -59,16 +59,16 @@
 				  Будь ласка, коректно вкажіть по-батькові відправника.
 				</div>
 			  </div>
-	 
+
 			  <div class="d-flex justify-content-center" style="margin-top: 30px;">
 				<button class="btn btn-danger" v-on:click="goBack" style="margin: 10px; width: 100px; font-size: 14px;">Back</button>
- 
+
 			  </div>
-	 
+
 			</div>
 		  </fieldset>
 		</form>
- 
+
 	</div>
 </template>
 
@@ -81,7 +81,7 @@ export default {
 	data() {
 		return {
 			name: '',
-			phone: '',
+      email: '',
 			street: '',
 			house: '',
 			apt: '',
@@ -90,7 +90,7 @@ export default {
 		}
 	},
 	created() {
-		if (!appConfig.phone) {
+		if (!appConfig.item) {
 			this.$router.push('/phones');
 		} else {
 			this.setData();
@@ -99,19 +99,20 @@ export default {
 	methods: {
 		setData() {
 			if (appConfig) {
-				if (appConfig.phone) {
-					this.id = appConfig.phone.id;
-					this.name = appConfig.phone.name;
-					this.phone = appConfig.phone.phone;
-					this.street = appConfig.phone.street;
-					this.house = appConfig.phone.house;
-					this.apt = appConfig.phone.apt;
-					this.index = appConfig.phone.index;
+				if (appConfig.item) {
+
+					this.id = appConfig.item.id;
+					this.name = appConfig.item.first_name;
+					this.phone = appConfig.item.email;
+					this.street = appConfig.item.street;
+					this.house = appConfig.item.house;
+					this.apt = appConfig.item.apt;
+					this.index = appConfig.item.index;
 				}
 			}
 		},
 		goBack() {
-			this.$router.push('/phones');
+			this.$router.push('/clients');
 		}
 	}
 }
