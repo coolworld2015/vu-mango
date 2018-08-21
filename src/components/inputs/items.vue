@@ -204,7 +204,7 @@ export default {
 			}
 		},
 		showDetails(item){
-			appConfig.phone = item;
+			appConfig.item = item;
 			this.$router.push('phone-edit');
 		},
 		sort(a, b) {

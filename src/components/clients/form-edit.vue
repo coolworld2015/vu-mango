@@ -46,15 +46,7 @@
 
 			  <div class="form-group">
 				<label for="senderPatronymic">Apt</label>
-				<input type="text" class="form-control" id="senderPatronymic1" placeholder="Apt" v-model="apt">
-				<div class="invalid-feedback">
-				  Будь ласка, коректно вкажіть по-батькові відправника.
-				</div>
-			  </div>
-
-			  <div class="form-group">
-				<label for="senderPatronymic">ZIP Code</label>
-				<input type="text" class="form-control" id="senderPatronymic1" placeholder="ZIP Code" v-model="index">
+				<input type="text" class="form-control" id="senderPatronymic1" placeholder="Apt" v-model="id">
 				<div class="invalid-feedback">
 				  Будь ласка, коректно вкажіть по-батькові відправника.
 				</div>
@@ -84,7 +76,7 @@ export default {
       email: '',
 			street: '',
 			house: '',
-			apt: '',
+			id: '',
 			index: '',
 			loading: false
 		}
@@ -104,9 +96,9 @@ export default {
 					this.id = appConfig.item.id;
 					this.name = appConfig.item.first_name;
 					this.phone = appConfig.item.email;
-					this.street = appConfig.item.street;
-					this.house = appConfig.item.house;
-					this.apt = appConfig.item.apt;
+					this.street = appConfig.item.last_name;
+					this.house = appConfig.item.username;
+					this.apt = appConfig.item.password;
 					this.index = appConfig.item.index;
 				}
 			}
