@@ -24,8 +24,8 @@
 
 		<div class="search-results-header">
 			<div class="search-results-item search-results-choose"></div>
-			<div class="search-results-item search-results-transfer" style="left: 1px;" v-on:click="changeSearch('name')">First name</div>
-			<div class="search-results-item search-results-transfer" style="left: 0px;" v-on:click="changeSearch('phone')">Last name</div>
+			<div class="search-results-item search-results-transfer" style="left: 1px;" v-on:click1="changeSearch('name')">First name</div>
+			<div class="search-results-item search-results-transfer" style="left: 0px;" v-on:click1="changeSearch('phone')">Last name</div>
 			<div class="search-results-item search-results-transfer" style="left: 0px;">Username</div>
 			<div class="search-results-item search-results-sender" style="left: 25px;">E-mail</div>
 
@@ -42,7 +42,7 @@ export default {
 	data() {
 	  return {
 		searchQuery: '',
-		searchType: 'name',
+		searchType: 'email',
 		name: true,
 		phone: false
 	  }

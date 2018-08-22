@@ -66,25 +66,25 @@ export default {
 			title: 'Something went wrong',
 			message: 'Server responded with status code error',
 			important: true
-		}
+		};
 		appConfig.$on('clearHeader', () => {
 			this.status = 'show';
 			setTimeout(()=>{document.querySelector('.search-results-content').addEventListener('scroll', this.handleScroll)}, 100);
-		})
+		});
 		appConfig.$on('searchQueryPhones', (searchQuery, searchType) => {
 			this.searchQuery = searchQuery;
-			let arr = [].concat(appConfig.phones.items);
-			let items = [].concat(appConfig.phones.items);
+			let arr = [].concat(this.filteredItems);
+			let items = [].concat(this.filteredItems);
 
-			if (searchType == 'name') {
-				items = arr.filter((el) => el.name.toLowerCase().indexOf(searchQuery.toLowerCase()) != -1);
+			if (searchType == 'email') {
+				items = arr.filter((el) => el.email.toLowerCase().indexOf(searchQuery.toLowerCase()) != -1);
 			}
 
 			if (searchType == 'phone') {
 				items = arr.filter((el) => el.phone.toLowerCase().indexOf(searchQuery.toLowerCase()) != -1);
 			}
 
-			this.filteredItems = items;
+			//this.filteredItems = items;
 			this.items = items.slice(0, 20);
 			this.positionY = 0;
 			this.recordsCount = 20;
@@ -93,7 +93,7 @@ export default {
 				this.items = appConfig.phones.items.slice(0, 20);
 				this.filteredItems = appConfig.phones.items;
 			}
-		})
+		});
 		appConfig.$on('searchName', searchQuery => {
 				this.status = 'loading';
 				if (!appConfig.http) {
@@ -148,7 +148,7 @@ export default {
 	methods: {
 		fetchData() {
 			this.status = 'loading';
-			this.$http.get('http://94.130.206.254/api/Customers?access_token=' + appConfig.access_token)
+			this.$http.get(appConfig.URL + 'Customers?access_token=' + appConfig.access_token)
 				.then(result => {
 				  console.log(result);
 					appConfig.phones.items = result.data.sort(this.sort);
