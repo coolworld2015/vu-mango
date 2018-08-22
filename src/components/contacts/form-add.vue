@@ -14,10 +14,10 @@
         <div class="form-section" style="width: 100%;">
           <div class="form-group">
             <label for="senderSurname">First Name</label>
-            <input type="text" class="form-control" id="senderSurname" placeholder="First Name"
+            <input type="text" class="form-control" id="senderSurname1" placeholder="First Name"
               v-model="firstName"
               v-on:keypress="clearWarning"
-              v-bind:class="{ warning: fieldsErrors.name }">
+              v-bind:class="{ warning: fieldsErrors.firstName }">
             <div class="invalid-feedback">
               Будь ласка, коректно вкажіть прізвище відправника.
             </div>
@@ -25,10 +25,10 @@
 
           <div class="form-group">
             <label for="senderSurname">Last Name</label>
-            <input type="text" class="form-control" id="senderSurname" placeholder="Last Name"
+            <input type="text" class="form-control" id="senderSurname2" placeholder="Last Name"
               v-model="lastName"
               v-on:keypress="clearWarning"
-              v-bind:class="{ warning: fieldsErrors.name }">
+              v-bind:class="{ warning: fieldsErrors.lastName }">
             <div class="invalid-feedback">
               Будь ласка, коректно вкажіть прізвище відправника.
             </div>
@@ -36,10 +36,10 @@
 
           <div class="form-group">
             <label for="senderSurname">Username</label>
-            <input type="text" class="form-control" id="senderSurname" placeholder="Username"
+            <input type="text" class="form-control" id="senderSurname3" placeholder="Username"
               v-model="username"
               v-on:keypress="clearWarning"
-              v-bind:class="{ warning: fieldsErrors.name }">
+              v-bind:class="{ warning: fieldsErrors.username }">
             <div class="invalid-feedback">
               Будь ласка, коректно вкажіть прізвище відправника.
             </div>
@@ -50,7 +50,7 @@
             <input type="text" class="form-control" id="senderSurname" placeholder="E-mail"
               v-model="email"
               v-on:keypress="clearWarning"
-              v-bind:class="{ warning: fieldsErrors.name }">
+              v-bind:class="{ warning: fieldsErrors.email }">
             <div class="invalid-feedback">
               Будь ласка, коректно вкажіть прізвище відправника.
             </div>
@@ -61,7 +61,7 @@
             <input type="text" class="form-control" id="senderName" placeholder="Password"
               v-model="password"
               v-on:keypress="clearWarning"
-              v-bind:class="{ warning: fieldsErrors.pass }">
+              v-bind:class="{ warning: fieldsErrors.password }">
             <div class="invalid-feedback">
               Будь ласка, коректно вкажіть ім'я відправника.
             </div>
@@ -144,18 +144,28 @@ export default {
 			this.$router.push('/contacts');
 		},
 		addItem() {
-			if (this.name === '') {
-				this.fieldsErrors.name = true;
+			if (this.firstName === '') {
+				this.fieldsErrors.firstName = true;
 				this.invalidValue = true;
 			}
 
-			if (this.pass === '') {
-				this.fieldsErrors.pass = true;
+			if (this.lastName === '') {
+				this.fieldsErrors.lastName = true;
 				this.invalidValue = true;
 			}
 
-			if (this.description === '') {
-				this.fieldsErrors.description = true;
+			if (this.username === '') {
+				this.fieldsErrors.username = true;
+				this.invalidValue = true;
+			}
+
+			if (this.email === '') {
+				this.fieldsErrors.email = true;
+				this.invalidValue = true;
+			}
+
+			if (this.password === '') {
+				this.fieldsErrors.password = true;
 				this.invalidValue = true;
 			}
 
@@ -164,12 +174,12 @@ export default {
 			}
 
 			this.loading = true;
-			this.$http.post(appConfig.URL + 'users/add', {
-					id: +new Date,
-					name: this.name,
-					pass: this.pass,
-					description: this.description,
-					authorization: appConfig.access_token
+			this.$http.post(appConfig.URL + 'Customers?access_token='  + appConfig.access_token, {
+          first_name: this.firstName,
+          last_name: this.lastName,
+          username: this.username,
+          email: this.email,
+          password: this.password
 				})
 				.then(result => {
 					if (result.body.error) {
@@ -185,9 +195,11 @@ export default {
 				})
 		},
 		clearWarning() {
-			this.fieldsErrors.name = false;
-			this.fieldsErrors.pass = false;
-			this.fieldsErrors.description = false;
+			this.fieldsErrors.firstName = false;
+			this.fieldsErrors.lastName = false;
+			this.fieldsErrors.username = false;
+			this.fieldsErrors.email = false;
+			this.fieldsErrors.password = false;
 			this.invalidValue = false;
 		}
 	}
