@@ -10,6 +10,7 @@ import Inputs from '@/components/inputs/inputs';
 import InputEdit from '@/components/inputs/edit';
 
 import Outputs from '@/components/outputs/outputs';
+import OutputEdit from '@/components/outputs/edit';
 
 import Contacts from '@/components/contacts/contacts';
 import ContactEdit from '@/components/contacts/edit';
@@ -27,6 +28,7 @@ export default new Router({
     { path: '/input-edit', component: InputEdit },
 
     { path: '/outputs', component: Outputs },
+    { path: '/output-edit', component: OutputEdit },
 
     { path: '/contacts', component: Contacts },
     { path: '/contact-edit', component: ContactEdit },

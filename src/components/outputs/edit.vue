@@ -13,10 +13,10 @@
 
 <script>
 import navbar from '@/components/common/navbar';
-import phoneFormEdit from '@/components/inputs/form-edit';
+import phoneFormEdit from '@/components/outputs/form-edit';
 
 export default {
-	name: 'phone-edit',
+	name: 'output-edit',
 	components: {
 		navbar:	navbar,
 		phoneFormEdit: phoneFormEdit

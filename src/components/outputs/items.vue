@@ -9,7 +9,7 @@
 
 		<div class="payment selected1" v-for="item in items" v-on:click="showDetails(item)" >
 			<div class="search-results-item search-results-choose"><span class="circle" style="background: #8bc34a;"></span></div>
-      <div class="search-results-item search-results-sender">{{ item.from.email }}</div>
+      <div class="search-results-item search-results-sender">{{ item.to.email }}</div>
       <div class="search-results-item search-results-transfer">{{ ((+item.value).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ") }}</div>
 
       <div class="search-results-item search-results-transfer" style="right: 35px;">{{ item.date.split('T')[0] }} {{ item.date.split('T')[1].split('.')[0]}}</div>
@@ -205,7 +205,7 @@ export default {
 		},
 		showDetails(item){
 			appConfig.item = item;
-			this.$router.push('phone-edit');
+			this.$router.push('output-edit');
 		},
 		sort(a, b) {
 			let nameA = a.username.toLowerCase(), nameB = b.username.toLowerCase();
