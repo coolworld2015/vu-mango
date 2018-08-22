@@ -16,7 +16,7 @@ import navbar from '@/components/common/navbar';
 import phoneFormEdit from '@/components/inputs/form-edit';
 
 export default {
-	name: 'phone-edit',
+	name: 'input-edit',
 	components: {
 		navbar:	navbar,
 		phoneFormEdit: phoneFormEdit

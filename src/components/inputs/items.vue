@@ -205,7 +205,7 @@ export default {
 		},
 		showDetails(item){
 			appConfig.item = item;
-			this.$router.push('phone-edit');
+			this.$router.push('input-edit');
 		},
 		sort(a, b) {
 			let nameA = a.username.toLowerCase(), nameB = b.username.toLowerCase();

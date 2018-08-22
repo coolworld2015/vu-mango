@@ -5,7 +5,10 @@ Vue.use(Router);
 import Login from '@/components/common/login';
 
 import Balance from '@/components/balance/balance';
+
 import Inputs from '@/components/inputs/inputs';
+import InputEdit from '@/components/inputs/edit';
+
 import Outputs from '@/components/outputs/outputs';
 
 import Contacts from '@/components/contacts/contacts';
@@ -19,7 +22,10 @@ export default new Router({
     { path: '/login', component: Login },
 
     { path: '/balance', component: Balance },
+
     { path: '/inputs', component: Inputs },
+    { path: '/input-edit', component: InputEdit },
+
     { path: '/outputs', component: Outputs },
 
     { path: '/contacts', component: Contacts },
