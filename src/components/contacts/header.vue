@@ -3,19 +3,7 @@
 		<form v-show="name" class="search-form" id="search" style="display: block; position: absolute; top: -55px;">
 			<input type="text" class="form-control" placeholder="Search by e-mail"
 				v-model="searchQuery" v-on:click="searchClear" v-on:keyup="changeView">
-
-			<div v-on:click="searchName">
-				<svg class="search-form-svg">
-					<use xlink:href="#maginifierTool"></use>
-				</svg>
-			</div>
-		</form>
-
-		<form v-show="phone" class="search-form" id="search" style="display: block; position: absolute; top: -55px;">
-			<input type="text" class="form-control" placeholder="Search by phone"
-				v-model="searchQuery" v-on:click="searchClear" v-on:keyup="changeView">
-
-			<div v-on:click="searchPhone">
+			<div>
 				<svg class="search-form-svg">
 					<use xlink:href="#maginifierTool"></use>
 				</svg>
@@ -24,11 +12,10 @@
 
 		<div class="search-results-header">
 			<div class="search-results-item search-results-choose"></div>
-			<div class="search-results-item search-results-transfer" style="left: 1px;" v-on:click1="changeSearch('name')">First name</div>
-			<div class="search-results-item search-results-transfer" style="left: 0px;" v-on:click1="changeSearch('phone')">Last name</div>
+			<div class="search-results-item search-results-transfer" style="left: 1px;">First name</div>
+			<div class="search-results-item search-results-transfer" style="left: 0px;">Last name</div>
 			<div class="search-results-item search-results-transfer" style="left: 0px;">Username</div>
 			<div class="search-results-item search-results-sender" style="left: 25px;">E-mail</div>
-
 			<div class="search-results-item search-results-result" style="left: 15px;">ID</div>
 		</div>
 	</header>
@@ -53,31 +40,12 @@ export default {
 		});
 	},
 	methods: {
-		changeSearch(value) {
-			if (value == 'name') {
-				this.name = true;
-				this.phone = false;
-				this.searchType = 'name';
-			}
-
-			if (value == 'phone') {
-				this.name = false;
-				this.phone = true;
-				this.searchType = 'phone';
-			}
-		},
 		changeView() {
-			appConfig.$emit('searchQueryPhones', this.searchQuery, this.searchType);
+			appConfig.$emit('searchQueryContacts', this.searchQuery, this.searchType);
 		},
 		searchClear() {
 			this.searchQuery = '';
-			appConfig.$emit('searchQueryPhones', this.searchQuery);
-		},
-		searchName() {
-			appConfig.$emit('searchName', this.searchQuery);
-		},
-		searchPhone() {
-			appConfig.$emit('searchPhone', this.searchQuery);
+			appConfig.$emit('searchQueryContacts', this.searchQuery);
 		}
 	}
 }

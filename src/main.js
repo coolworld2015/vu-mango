@@ -17,6 +17,7 @@ appConfig.URL = 'http://94.130.206.254/api/';
 appConfig.getAccessToken = ()=> {appConfig.access_token = localStorage.getItem('access_token');};
 
 appConfig.phones = { items: [], refresh: true };
+appConfig.contacts = { items: [], refresh: true };
 appConfig.audits = { items: [] };
 appConfig.users = { items: [] };
 appConfig.notifications = {items: []};

@@ -43,22 +43,21 @@ export default {
 		filteredItems: [],
 		recordsCount: 20,
 		positionY: 0,
-		status: 'show',
-		clicked: false,
+		status: 'show'
 	  }
 	},
 	created() {
     this.fetchData();
-		//this.items = appConfig.phones.items.sort(this.sort).slice(0, 20);
-		this.filteredItems = appConfig.phones.items.sort(this.sort);
+		this.items = appConfig.contacts.items.sort(this.sort).slice(0, 20);
+		this.filteredItems = appConfig.contacts.items.sort(this.sort);
 		setTimeout(()=> {
 			if (document.querySelector('.search-results-content')) {
 				document.querySelector('.search-results-content').addEventListener('scroll', this.handleScroll)
 			}
 		}, 100);
 
-		if (appConfig.phones.refresh) {
-            appConfig.phones.refresh = false;
+		if (appConfig.contacts.refresh) {
+            appConfig.contacts.refresh = false;
 			this.fetchData();
 		}
 
@@ -71,91 +70,37 @@ export default {
 			this.status = 'show';
 			setTimeout(()=>{document.querySelector('.search-results-content').addEventListener('scroll', this.handleScroll)}, 100);
 		});
-		appConfig.$on('searchQueryPhones', (searchQuery, searchType) => {
+		appConfig.$on('searchQueryContacts', (searchQuery, searchType) => {
 			this.searchQuery = searchQuery;
 			let arr = [].concat(this.filteredItems);
-			let items = [].concat(this.filteredItems);
+			let items;
 
-			if (searchType == 'email') {
-				items = arr.filter((el) => el.email.toLowerCase().indexOf(searchQuery.toLowerCase()) != -1);
-			}
+      items = arr.filter((el) => el.email.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1);
 
-			if (searchType == 'phone') {
-				items = arr.filter((el) => el.phone.toLowerCase().indexOf(searchQuery.toLowerCase()) != -1);
-			}
-
-			//this.filteredItems = items;
+			this.filteredItems = items;
 			this.items = items.slice(0, 20);
 			this.positionY = 0;
 			this.recordsCount = 20;
+
 			appConfig.$emit('itemsCount', items.length);
-			if (searchQuery == '') {
-				this.items = appConfig.phones.items.slice(0, 20);
-				this.filteredItems = appConfig.phones.items;
+			if (searchQuery === '') {
+				this.items = appConfig.contacts.items.slice(0, 20);
+				this.filteredItems = appConfig.contacts.items;
+        appConfig.$emit('itemsCount', this.filteredItems.length);
 			}
 		});
-		appConfig.$on('searchName', searchQuery => {
-				this.status = 'loading';
-				if (!appConfig.http) {
-					return;
-				}
-
-				if (searchQuery !== '') {
-				appConfig.http = false;
-				this.$http.get(appConfig.URL + 'items/findByName/' + searchQuery, {headers: {'Authorization': appConfig.access_token}})
-					.then(result => {
-						appConfig.phones.items = result.data.sort(this.sort);
-						this.items = result.data.sort(this.sort).slice(0, 20);
-						this.filteredItems = result.data.sort(this.sort);
-						appConfig.$emit('itemsCount', result.data.length);
-						setTimeout(()=>{document.querySelector('.search-results-content').addEventListener('scroll', this.handleScroll)}, 100);
-						this.status = 'show';
-						appConfig.http = true;
-						appConfig.$emit('clearHeader');
-					}).catch((error)=> {
-						appConfig.notifications.items.push(this.notification);
-						this.status = 'show';
-						appConfig.http = true;
-					})
-				}
-		}),
-		appConfig.$on('searchPhone', searchQuery => {
-				this.status = 'loading';
-				if (!appConfig.http) {
-					return;
-				}
-
-				if (searchQuery !== '') {
-				appConfig.http = false;
-				this.$http.get(appConfig.URL + 'items/findByPhone/' + searchQuery, {headers: {'Authorization': appConfig.access_token}})
-					.then(result => {
-						appConfig.phones.items = result.data.sort(this.sort);
-						this.items = result.data.sort(this.sort).slice(0, 20);
-						this.filteredItems = result.data.sort(this.sort);
-						appConfig.$emit('itemsCount', result.data.length);
-						setTimeout(()=>{document.querySelector('.search-results-content').addEventListener('scroll', this.handleScroll)}, 100);
-						this.status = 'show';
-						appConfig.http = true;
-						appConfig.$emit('clearHeader');
-					}).catch((error)=> {
-						appConfig.notifications.items.push(this.notification);
-						this.status = 'show';
-						appConfig.http = true;
-					})
-				}
-		})
 	},
 	methods: {
 		fetchData() {
 			this.status = 'loading';
 			this.$http.get(appConfig.URL + 'Customers?access_token=' + appConfig.access_token)
 				.then(result => {
-				  console.log(result);
-					appConfig.phones.items = result.data.sort(this.sort);
+					appConfig.contacts.items = result.data.sort(this.sort);
 					this.items = result.data.sort(this.sort).slice(0, 20);
 					this.filteredItems = result.data.sort(this.sort);
-					this.status = 'show';
-					appConfig.$emit('itemsCount', result.data.length);
+          appConfig.$emit('itemsCount', result.data.length);
+          this.status = 'show';
+          
 					setTimeout(()=>{document.querySelector('.search-results-content').addEventListener('scroll', this.handleScroll)}, 100);
 				}).catch((error)=> {
 					appConfig.notifications.items.push(this.notification);
@@ -164,8 +109,8 @@ export default {
 				})
 		},
 		handleScroll() {
-			var position = document.querySelector('.search-results-content').scrollTop;
-			var items, positionY, recordsCount;
+			let position = document.querySelector('.search-results-content').scrollTop;
+			let items, positionY, recordsCount;
 			recordsCount = this.recordsCount;
 			positionY = this.positionY;
 			items = this.filteredItems.slice(0, recordsCount);
@@ -174,13 +119,6 @@ export default {
 				this.items = items;
 				this.recordsCount = recordsCount + 10;
 				this.positionY = positionY + 400;
-			}
-		},
-		onItem(item) {
-			if (this.clicked) {
-				this.clicked = false;
-			} else {
-				this.clicked = true;
 			}
 		},
 		showDetails(item){
