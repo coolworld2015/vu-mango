@@ -16,7 +16,7 @@ import navbar from '@/components/common/navbar';
 import userFormAdd from '@/components/outputs/form-add';
 
 export default {
-	name: 'user-add',
+	name: 'output-add',
 	components: {
 		navbar:	navbar,
 		userFormAdd: userFormAdd

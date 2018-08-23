@@ -18,6 +18,7 @@ appConfig.getAccessToken = ()=> {appConfig.access_token = localStorage.getItem('
 
 appConfig.phones = { items: [], refresh: true };
 appConfig.contacts = { items: [], refresh: true };
+appConfig.outputs = { items: [], refresh: true };
 appConfig.audits = { items: [] };
 appConfig.users = { items: [] };
 appConfig.notifications = {items: []};
