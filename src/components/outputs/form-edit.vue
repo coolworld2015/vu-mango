@@ -7,54 +7,63 @@
 
 	<div v-else>
 		<div style="margin: auto; width: 25%; font-size: 22px; font-weight: bold; margin-bottom: 10px;">
-			<div style="text-align: center; padding-right: 40px;">{{ name }}</div>
+			<div style="text-align: center; padding-right: 40px;">{{ username }}</div>
 		</div>
 		<form class="payment-form payment-form--create d-flex justify-content-stretch" autocomplete="off">
 		  <fieldset class="sender-data form-section-wrapper">
 			<div class="form-section" style="width: 100%;">
+
+        <div class="form-group">
+          <label for="senderPatronymic1">Amount</label>
+          <input type="text" class="form-control" id="senderPatronymic1" placeholder="Street" v-model="amount">
+          <div class="invalid-feedback">
+            Будь ласка, коректно вкажіть по-батькові відправника.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="senderPatronymic2">Date</label>
+          <input type="text" class="form-control" id="senderPatronymic2" placeholder="House" v-model="date">
+          <div class="invalid-feedback">
+            Будь ласка, коректно вкажіть по-батькові відправника.
+          </div>
+        </div>
+
 			  <div class="form-group">
-				<label for="senderSurname">Name</label>
-				<input type="text" class="form-control" id="senderSurname" placeholder="Name" v-model="name">
+				<label for="senderSurname">First Name</label>
+				<input type="text" class="form-control" id="senderSurname" placeholder="Name" v-model="firstName">
 				<div class="invalid-feedback">
 				  Будь ласка, коректно вкажіть прізвище відправника.
 				</div>
 			  </div>
 
 			  <div class="form-group">
-				<label for="senderName">Phone</label>
-				<input type="text" class="form-control" id="senderName" placeholder="Phone" v-model="phone">
+				<label for="senderName">Last Name</label>
+				<input type="text" class="form-control" id="senderName" placeholder="Phone" v-model="lastName">
 				<div class="invalid-feedback">
 				  Будь ласка, коректно вкажіть ім'я відправника.
 				</div>
 			  </div>
 
 			  <div class="form-group">
-				<label for="senderPatronymic">Street</label>
-				<input type="text" class="form-control" id="senderPatronymic1" placeholder="Street" v-model="street">
+				<label for="senderPatronymic3">Username</label>
+				<input type="text" class="form-control" id="senderPatronymic3" placeholder="Apt" v-model="username">
 				<div class="invalid-feedback">
 				  Будь ласка, коректно вкажіть по-батькові відправника.
 				</div>
 			  </div>
 
 			  <div class="form-group">
-				<label for="senderPatronymic">House</label>
-				<input type="text" class="form-control" id="senderPatronymic1" placeholder="House" v-model="house">
+				<label for="senderPatronymic3">E-mail</label>
+				<input type="text" class="form-control" id="senderPatronymic3" placeholder="Apt" v-model="email">
 				<div class="invalid-feedback">
 				  Будь ласка, коректно вкажіть по-батькові відправника.
 				</div>
 			  </div>
 
 			  <div class="form-group">
-				<label for="senderPatronymic">Apt</label>
-				<input type="text" class="form-control" id="senderPatronymic1" placeholder="Apt" v-model="apt">
-				<div class="invalid-feedback">
-				  Будь ласка, коректно вкажіть по-батькові відправника.
-				</div>
-			  </div>
-
-			  <div class="form-group">
-				<label for="senderPatronymic">ZIP Code</label>
-				<input type="text" class="form-control" id="senderPatronymic1" placeholder="ZIP Code" v-model="index">
+				<label for="senderPatronymic4">ID</label>
+				<input type="text" class="form-control" id="senderPatronymic4" placeholder="ZIP Code" v-model="id">
 				<div class="invalid-feedback">
 				  Будь ласка, коректно вкажіть по-батькові відправника.
 				</div>
@@ -80,11 +89,11 @@ export default {
 	name: 'users-edit',
 	data() {
 		return {
-			name: '',
-			phone: '',
-			street: '',
-			house: '',
-			apt: '',
+      username: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+			id: '',
 			index: '',
 			loading: false
 		}
@@ -100,13 +109,14 @@ export default {
 		setData() {
 			if (appConfig) {
 				if (appConfig.item) {
-					this.id = appConfig.item.id;
-					this.name = appConfig.item.name;
-					this.phone = appConfig.item.phone;
-					this.street = appConfig.item.street;
-					this.house = appConfig.item.house;
-					this.apt = appConfig.item.apt;
-					this.index = appConfig.item.id;
+
+          this.id = appConfig.item.id;
+          this.firstName = appConfig.item.to.first_name;
+          this.lastName = appConfig.item.to.last_name;
+          this.username = appConfig.item.to.username;
+          this.email = appConfig.item.to.email;
+          this.amount = ((+appConfig.item.value).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ");
+          this.date = appConfig.item.date.split('T')[0] + ' ' + appConfig.item.date.split('T')[1].split('.')[0];
 				}
 			}
 		},
