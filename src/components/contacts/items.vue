@@ -50,6 +50,7 @@ export default {
     this.fetchData();
 		this.items = appConfig.contacts.items.sort(this.sort).slice(0, 20);
 		this.filteredItems = appConfig.contacts.items.sort(this.sort);
+
 		setTimeout(()=> {
 			if (document.querySelector('.search-results-content')) {
 				document.querySelector('.search-results-content').addEventListener('scroll', this.handleScroll)
@@ -100,7 +101,7 @@ export default {
 					this.filteredItems = result.data.sort(this.sort);
           appConfig.$emit('itemsCount', result.data.length);
           this.status = 'show';
-          
+
 					setTimeout(()=>{document.querySelector('.search-results-content').addEventListener('scroll', this.handleScroll)}, 100);
 				}).catch((error)=> {
 					appConfig.notifications.items.push(this.notification);

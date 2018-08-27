@@ -53,6 +53,27 @@ export default {
 	},
 	created() {
     this.fetchData();
+    this.notification = {
+      title: 'Something went wrong',
+      message: 'Server responded with status code error',
+      important: true
+    };
+    appConfig.$on('searchQuery', (searchQuery) => {
+      this.searchQuery = searchQuery;
+      var arr = [].concat(appConfig.outputs.items)
+      let items = arr.filter((el) => el.to.email.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1);
+
+      this.filteredItems = items;
+      this.items = items.slice(0, 20);
+      this.positionY = 0;
+      this.recordsCount = 20;
+
+      appConfig.$emit('itemsCount', items.length);
+      if (searchQuery === '') {
+        this.items = appConfig.outputs.items.slice(0, 20);
+        this.filteredItems = appConfig.outputs.items;
+      }
+    });
 	},
 	methods: {
     fetchData() {
@@ -60,6 +81,7 @@ export default {
       this.items = [];
       this.$http.get('http://94.130.206.254/api/Customers/transactions-list?access_token=' + appConfig.access_token)
         .then(result => {
+          //appConfig.outputs.items = result.data.data.transactions.reverse();
           let customer = result.data.data.customer.email;
           console.log(result.data.data);
           let data = result.data.data.transactions.reverse();
@@ -69,11 +91,12 @@ export default {
             if (el.to.email) {
               if (el.to.email.toLowerCase() !== customer) {
                 this.items.push(el);
-                console.log(this.items);
+                //console.log(this.items);
               }
             }
           });
 
+          appConfig.outputs.items = [].concat(this.items);
           this.filteredItems = [].concat(this.items);
           this.status = 'show';
           appConfig.$emit('itemsCount', this.items.length);
