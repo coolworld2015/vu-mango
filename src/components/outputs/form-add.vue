@@ -112,6 +112,16 @@ export default {
         this.$router.push('login');
       })
     },
+    sort(a, b) {
+      let nameA = a.username.toLowerCase(), nameB = b.username.toLowerCase();
+      if (nameA < nameB) {
+        return -1
+      }
+      if (nameA > nameB) {
+        return 1
+      }
+      return 0;
+    },
     goBack() {
 			this.$router.push('/outputs');
 		},
