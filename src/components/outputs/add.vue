@@ -14,12 +14,19 @@
 <script>
 import navbar from '@/components/common/navbar';
 import userFormAdd from '@/components/outputs/form-add';
+import appConfig from '../../main';
 
 export default {
 	name: 'output-add',
 	components: {
 		navbar:	navbar,
 		userFormAdd: userFormAdd
-	}
+	},
+  created() {
+    appConfig.getAccessToken();
+    if (appConfig.access_token === 'login') {
+      this.$router.push('login');
+    }
+  }
 }
 </script>

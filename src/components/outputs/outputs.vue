@@ -29,7 +29,7 @@ export default {
   },
 	created() {
 		appConfig.getAccessToken();
-		if (appConfig.access_token == 'login') {
+		if (appConfig.access_token === 'login') {
 			this.$router.push('login');
 		}
 

@@ -7,41 +7,42 @@
 
   <div v-else>
 	<div style="margin: auto; width: 25%; font-size: 22px; font-weight: bold; margin-bottom: 10px;">
-		<div style="text-align: center; padding-right: 40px;">New user</div>
+		<div style="text-align: center; padding-right: 40px;">New transfer</div>
 	</div>
     <form class="payment-form payment-form--create d-flex justify-content-stretch" autocomplete="off">
       <fieldset class="sender-data form-section-wrapper">
         <div class="form-section" style="width: 100%;">
-          <div class="form-group">
-            <label for="senderSurname">Login</label>
-            <input type="text" class="form-control" id="senderSurname" placeholder="Login"
-				v-model="name"
-				v-on:keypress="clearWarning"
-				v-bind:class="{ warning: fieldsErrors.name }">
+
+          <!--<div class="form-group">
+            <label for="senderSurname">E-mail</label>
+            <input type="text" class="form-control" id="senderSurname" placeholder="E-mail"
+              v-model="email"
+              v-on:keypress="clearWarning"
+              v-bind:class="{ warning: fieldsErrors.email }">
             <div class="invalid-feedback">
               Будь ласка, коректно вкажіть прізвище відправника.
             </div>
+          </div>-->
+
+          <div class="form-group">
+            <label>E-mail</label>
+            <select class="form-control" v-model="contactID" v-on:change="changeEmail"
+                    v-on:keypress="clearWarning"
+                    v-bind:class="{ warning: fieldsErrors.contactEmail }">
+              <option v-for="option in contacts" v-bind:value="option.id" v-bind:data-email="option.email">
+                {{ option.email }}
+              </option>
+            </select>
           </div>
 
           <div class="form-group">
-            <label for="senderName">Password</label>
-            <input type="text" class="form-control" id="senderName" placeholder="Password"
-				v-model="pass"
-				v-on:keypress="clearWarning"
-				v-bind:class="{ warning: fieldsErrors.pass }">
+            <label for="senderName">Amount</label>
+            <input type="text" class="form-control" id="senderName" placeholder="Amount"
+              v-model="amount"
+              v-on:keypress="clearWarning"
+              v-bind:class="{ warning: fieldsErrors.amount }">
             <div class="invalid-feedback">
               Будь ласка, коректно вкажіть ім'я відправника.
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="senderPatronymic">Description</label>
-            <input type="text" class="form-control" id="senderPatronymic1" placeholder="Description"
-				v-model="description"
-				v-on:keypress="clearWarning"
-				v-bind:class="{ warning: fieldsErrors.description }">
-            <div class="invalid-feedback">
-              Будь ласка, коректно вкажіть по-батькові відправника.
             </div>
           </div>
 
@@ -69,30 +70,28 @@ export default {
 	name: 'users-add',
 	data() {
 		return {
-			name: '',
-			pass: '',
-			description: '',
+      email: '',
 			amount: '',
-			role: '',
-			pnfp: '',
-			receiverPhone: '',
-			receiverPhoneErr: false,
 			loading: false,
+      contacts: [{id:0, email:'Select e-mail'}],
+      contactID: 0,
+      contactEmail: 'Select e-mail',
 			status: '',
 			invalidValue: false,
 			fieldsErrors: {
-				name: false,
-				pass: false,
-				description: false
+        email: false,
+        amount: false,
+        contactEmail: false
 			}
 		}
 	},
 	created() {
+    this.getContacts();
 		this.notification = {
 			title: 'Something went wrong',
 			message: 'Server responded with status code error',
 			important: true
-		}
+		};
 		this.notification1 = {
 			title: 'Item created',
 			message: `Item was created successfully`
@@ -100,40 +99,30 @@ export default {
 	},
 	methods: {
 		setData() {
-			if (appConfig) {
-				if (appConfig.user) {
-					this.id = appConfig.user.id;
-					this.name = appConfig.user.name;
-					this.pass = appConfig.user.pass;
-					this.description = appConfig.user.description;
-				}
-			}
 		},
-		isValid (data) {
-			if (/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/.test(data)) {
-				console.log('Valid')
-				this.receiverPhoneErr = false;
-			} else {
-				console.log('BAD')
-				this.receiverPhoneErr = true;
-			}
-		},
-		goBack() {
+    getContacts() {
+      this.$http.get(appConfig.URL + 'Customers?access_token='  + appConfig.access_token)
+        .then(result => {
+          this.contacts = result.data.sort(this.sort);
+          this.contacts.unshift({id:0, email:'Select e-mail'});
+          this.loading = false;
+        }).catch(()=> {
+        appConfig.notifications.items.push(this.notification);
+        this.loading = false;
+        this.$router.push('login');
+      })
+    },
+    goBack() {
 			this.$router.push('/outputs');
 		},
 		addItem() {
-			if (this.name == '') {
-				this.fieldsErrors.name = true;
+			if (this.contactEmail === '' || this.contactEmail === 'Select e-mail') {
+				this.fieldsErrors.contactEmail = true;
 				this.invalidValue = true;
 			}
 
-			if (this.pass == '') {
-				this.fieldsErrors.pass = true;
-				this.invalidValue = true;
-			}
-
-			if (this.description == '') {
-				this.fieldsErrors.description = true;
+			if (this.amount === '') {
+				this.fieldsErrors.amount = true;
 				this.invalidValue = true;
 			}
 
@@ -142,12 +131,9 @@ export default {
 			}
 
 			this.loading = true;
-			this.$http.post(appConfig.URL + 'users/add', {
-					id: +new Date,
-					name: this.name,
-					pass: this.pass,
-					description: this.description,
-					authorization: appConfig.access_token
+			this.$http.post(appConfig.URL + 'Customers/transfer?access_token='  + appConfig.access_token, {
+          recipient: this.contactEmail,
+          value: this.amount
 				})
 				.then(result => {
 					if (result.body.error) {
@@ -155,17 +141,22 @@ export default {
 					} else {
 						appConfig.notifications.items.push(this.notification1);
 					}
-					this.$router.push('/users');
+					this.$router.push('/outputs');
 				})
-				.catch((error)=> {
+				.catch(()=> {
 					appConfig.notifications.items.push(this.notification);
-					this.$router.push('/users');
+					this.$router.push('/outputs');
 				})
 		},
+    changeEmail (e) {
+      this.clearWarning();
+      if(e.target.options.selectedIndex > -1) {
+        this.contactEmail = e.target.options[e.target.options.selectedIndex].dataset.email
+      }
+    },
 		clearWarning() {
-			this.fieldsErrors.name = false;
-			this.fieldsErrors.pass = false;
-			this.fieldsErrors.description = false;
+			this.fieldsErrors.contactEmail = false;
+			this.fieldsErrors.amount = false;
 			this.invalidValue = false;
 		}
 	}
