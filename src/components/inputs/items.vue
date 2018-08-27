@@ -53,105 +53,27 @@ export default {
 	},
 	created() {
     this.fetchData();
-/*		//this.items = appConfig.phones.items.sort(this.sort).slice(0, 20);
-		this.filteredItems = appConfig.phones.items.sort(this.sort);
-		setTimeout(()=> {
-			if (document.querySelector('.search-results-content')) {
-				document.querySelector('.search-results-content').addEventListener('scroll', this.handleScroll)
-			}
-		}, 100);
+    this.notification = {
+      title: 'Something went wrong',
+      message: 'Server responded with status code error',
+      important: true
+    };
+    appConfig.$on('searchQuery', (searchQuery) => {
+      this.searchQuery = searchQuery;
+      let arr = [].concat(appConfig.inputs.items);
+      let items = arr.filter((el) => el.from.email.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1);
 
-		if (appConfig.phones.refresh) {
-            appConfig.phones.refresh = false;
-			this.fetchData();
-		}
+      this.filteredItems = items;
+      this.items = items.slice(0, 20);
+      this.positionY = 0;
+      this.recordsCount = 20;
 
-		this.notification = {
-			title: 'Something went wrong',
-			message: 'Server responded with status code error',
-			important: true
-		};
-
-		appConfig.$on('clearHeader', () => {
-			this.status = 'show';
-			setTimeout(()=>{document.querySelector('.search-results-content').addEventListener('scroll', this.handleScroll)}, 100);
-		});
-
-		appConfig.$on('searchQueryPhones', (searchQuery, searchType) => {
-			this.searchQuery = searchQuery;
-			let arr = [].concat(appConfig.phones.items);
-			let items = [].concat(appConfig.phones.items);
-
-			if (searchType == 'name') {
-				items = arr.filter((el) => el.name.toLowerCase().indexOf(searchQuery.toLowerCase()) != -1);
-			}
-
-			if (searchType == 'phone') {
-				items = arr.filter((el) => el.phone.toLowerCase().indexOf(searchQuery.toLowerCase()) != -1);
-			}
-
-			this.filteredItems = items;
-			this.items = items.slice(0, 20);
-			this.positionY = 0;
-			this.recordsCount = 20;
-			appConfig.$emit('itemsCount', items.length);
-			if (searchQuery == '') {
-				this.items = appConfig.phones.items.slice(0, 20);
-				this.filteredItems = appConfig.phones.items;
-			}
-		});
-
-		appConfig.$on('searchName', searchQuery => {
-				this.status = 'loading';
-				if (!appConfig.http) {
-					return;
-				}
-
-				if (searchQuery !== '') {
-				appConfig.http = false;
-				this.$http.get(appConfig.URL + 'items/findByName/' + searchQuery, {headers: {'Authorization': appConfig.access_token}})
-					.then(result => {
-						appConfig.phones.items = result.data.sort(this.sort);
-						this.items = result.data.sort(this.sort).slice(0, 20);
-						this.filteredItems = result.data.sort(this.sort);
-						appConfig.$emit('itemsCount', result.data.length);
-						setTimeout(()=>{document.querySelector('.search-results-content').addEventListener('scroll', this.handleScroll)}, 100);
-						this.status = 'show';
-						appConfig.http = true;
-						appConfig.$emit('clearHeader');
-					}).catch((error)=> {
-						appConfig.notifications.items.push(this.notification);
-						this.status = 'show';
-						appConfig.http = true;
-					})
-				}
-		});
-
-		appConfig.$on('searchPhone', searchQuery => {
-				this.status = 'loading';
-				if (!appConfig.http) {
-					return;
-				}
-
-				if (searchQuery !== '') {
-				appConfig.http = false;
-				this.$http.get(appConfig.URL + 'items/findByPhone/' + searchQuery, {headers: {'Authorization': appConfig.access_token}})
-					.then(result => {
-						appConfig.phones.items = result.data.sort(this.sort);
-						this.items = result.data.sort(this.sort).slice(0, 20);
-						this.filteredItems = result.data.sort(this.sort);
-						appConfig.$emit('itemsCount', result.data.length);
-						setTimeout(()=>{document.querySelector('.search-results-content').addEventListener('scroll', this.handleScroll)}, 100);
-						this.status = 'show';
-						appConfig.http = true;
-						appConfig.$emit('clearHeader');
-					}).catch((error)=> {
-						appConfig.notifications.items.push(this.notification);
-						this.status = 'show';
-						appConfig.http = true;
-					})
-				}
-		})*/
+      appConfig.$emit('itemsCount', items.length);
+      if (searchQuery === '') {
+        this.items = appConfig.inputs.items.slice(0, 20);
+        this.filteredItems = appConfig.inputs.items;
+      }
+    });
 	},
 	methods: {
     fetchData() {
@@ -160,7 +82,6 @@ export default {
       this.$http.get('http://94.130.206.254/api/Customers/transactions-list?access_token=' + appConfig.access_token)
         .then(result => {
           let customer = result.data.data.customer.email;
-          console.log(result.data.data);
           let data = result.data.data.transactions.reverse();
           this.status = 'show';
 
@@ -168,11 +89,11 @@ export default {
             if (el.from.email) {
               if (el.from.email.toLowerCase() !== customer) {
                 this.items.push(el);
-                console.log(this.items);
               }
             }
           });
 
+          appConfig.inputs.items = [].concat(this.items);
           this.filteredItems = [].concat(this.items);
           this.status = 'show';
           appConfig.$emit('itemsCount', this.items.length);
@@ -184,8 +105,8 @@ export default {
       })
     },
 		handleScroll() {
-			var position = document.querySelector('.search-results-content').scrollTop;
-			var items, positionY, recordsCount;
+      let position = document.querySelector('.search-results-content').scrollTop;
+      let items, positionY, recordsCount;
 			recordsCount = this.recordsCount;
 			positionY = this.positionY;
 			items = this.filteredItems.slice(0, recordsCount);

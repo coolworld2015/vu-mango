@@ -60,7 +60,7 @@ export default {
     };
     appConfig.$on('searchQuery', (searchQuery) => {
       this.searchQuery = searchQuery;
-      var arr = [].concat(appConfig.outputs.items)
+      let arr = [].concat(appConfig.outputs.items);
       let items = arr.filter((el) => el.to.email.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1);
 
       this.filteredItems = items;
@@ -81,9 +81,7 @@ export default {
       this.items = [];
       this.$http.get('http://94.130.206.254/api/Customers/transactions-list?access_token=' + appConfig.access_token)
         .then(result => {
-          //appConfig.outputs.items = result.data.data.transactions.reverse();
           let customer = result.data.data.customer.email;
-          console.log(result.data.data);
           let data = result.data.data.transactions.reverse();
           this.status = 'show';
 
@@ -91,7 +89,6 @@ export default {
             if (el.to.email) {
               if (el.to.email.toLowerCase() !== customer) {
                 this.items.push(el);
-                //console.log(this.items);
               }
             }
           });
