@@ -3,7 +3,7 @@
 		<navbar></navbar>
 		<div class="content">
 			<main>
-				<section class="search-results">
+				<section class="search-results" style="overflow:auto;">
 					<phone-form-edit></phone-form-edit>
 				</section>
 			</main>
