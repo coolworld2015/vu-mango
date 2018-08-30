@@ -1,5 +1,5 @@
-# VU Base
-git clone https://github.com/coolworld2015/vu-base.git
+# VU Mango
+git clone https://github.com/coolworld2015/vu-mango.git
 -------------------------------------------------------------------------------------------------
 git config user.name "coolworld2015"
 -------------------------------------------------------------------------------------------------
