@@ -13,7 +13,8 @@ import './assets/css/font-awesome-4.7.0/css/font-awesome.min.css';
 
 const appConfig = new Vue();
 //appConfig.URL = 'http://94.130.206.254/api/';
-appConfig.URL = 'http://localhost:3000/api/';
+//appConfig.URL = 'http://localhost:3000/api/';
+appConfig.URL = 'http://jwt-mango.herokuapp.com/api/';
 
 appConfig.getAccessToken = ()=> {appConfig.access_token = localStorage.getItem('access_token');};
 
