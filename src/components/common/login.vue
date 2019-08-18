@@ -45,15 +45,16 @@ export default {
     fetchData () {
       this.loading = true
       this.error = false
-			// this.$http.post(appConfig.URL + 'login',
-      this.$http.post('http://94.130.206.254/api/Customers/login',
+			 this.$http.post(appConfig.URL + 'login',
+      // this.$http.post('http://94.130.206.254/api/Customers/login',
         {
-          username: this.name,
-          password: this.pass
+          name: this.name,
+          pass: this.pass,
+          description: 'Web'
         })
 				.then(result => {
-  appConfig.access_token = result.body.id
-  localStorage.setItem('access_token', result.body.id)
+  appConfig.access_token = result.body.token;
+  localStorage.setItem('access_token', result.body.token)
 					// localStorage.setItem('access_token', 'dcGi7WqWg1inskUjBpdWFXPkQSM9HuOyNyjmeLNPi3mtMxOfTdDTYMTo9n5HPrvd');
   this.loading = false
   this.error = false

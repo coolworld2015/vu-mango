@@ -53,6 +53,25 @@
     },
     methods: {
       fetchData() {
+        this.$http.get(appConfig.URL + 'balance', {headers: {'Authorization': appConfig.access_token}})
+          .then(result => {
+            //console.log(result)
+            //result = {};
+            //result.data = [{'data': {'balance': 1972}}]
+            //console.log(result)
+            appConfig.users.items = result.data.sort(this.sort);
+            this.items = result.data.sort(this.sort).slice(0, 20);
+            this.filteredItems = result.data.sort(this.sort);
+            this.status = 'show';
+            appConfig.$emit('itemsCount', result.data.length);
+            setTimeout(()=>{document.querySelector('.search-results-content').addEventListener('scroll', this.handleScroll)}, 100);
+          }).catch((error)=> {
+          appConfig.notifications.items.push(this.notification);
+          this.status = 'show';
+          this.$router.push('login');
+        })
+      },
+      fetchData1() {
         this.$http.get('http://94.130.206.254/api/Customers/getbalance?access_token=' + appConfig.access_token)
           .then(result => {
             appConfig.users.items = [].concat(result.data);

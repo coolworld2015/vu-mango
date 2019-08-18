@@ -1,8 +1,8 @@
 <template>
    <aside class="navigation-sidebar" v-bind:class="{ shown: isActive }">
 		<nav class="h-100 fp-navbar" onclick="event.preventDefault();return false">
-			<ul class="h-100 fp-nav-right">
-				<li v-on:click="changeView()">
+			<ul class="h-100 fp-nav-right" style="margin-left: 5px; top: -28px;">>
+				<li v-on:click="changeView()" style="margin-left: 5px;">
 					<img src="../../assets/img/logo.jpg" style="width1: 242px; height: 55px; margin-left: 3px; margin-right: 10px; margin-top: -5px;"
 						v-on:click="changeView()"
 					/>
@@ -10,8 +10,8 @@
             ValueCoin-Demo
 					</span>
 				</li>
-				<li class="fp-nav-item fp-nav-item-right">
-				  <span class="fp-nav-link menu-block-header">by Mangosoft</span>
+				<li class="fp-nav-item fp-nav-item-right" style="margin-left: 5px;">
+				  <span class="fp-nav-link menu-block-header">by CoolWorld</span>
 				</li>
 
 <!--
@@ -51,7 +51,7 @@
 				</li>
 			</ul>
 
-			<ul class="h-100 fp-nav-left">
+			<ul class="h-100 fp-nav-left" style="box-shadow: 3px 0px 10px 0px rgba(0,0,0,0.35);}">
 				<li class="fp-nav-item fp-nav-item-left li-border-bottom" v-on:click="changeView()">
 					<span class="fp-nav-link" id="showNav" title="ValueCoin">VC</span>
 					<span class="hot-key-hint">~</span>
